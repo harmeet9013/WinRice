@@ -1,23 +1,43 @@
-from colorama import Fore, Style
+from colorama import Fore
 # from Automation import automation
 from time import sleep
 import os
-clear = lambda: os.system('cls')
+def clear(): return os.system('cls')
 
-def display_menu(menu) :
+
+def display_menu(menu):
     def printItems():
+
+        print(
+            f"                  ( )       __        __       ( )      ___        ___    ")
+        print(
+            f"  //  / /  / /   / /     //   ) )   //  ) )   / /     //   ) )   //___) ) ")
+        print(
+            f" //  / /  / /   / /     //   / /   //        / /     //         //        ")
+        print(
+            f"((__( (__/ /   / /     //   / /   //        / /     ((____     ((____     ")
+        print(
+            f"\n--------------------------------------------------------------------------")
         for key, item in menu.items():
-            print(f'{key}. {item["label"]}')
+            print(f'{item["color"]}{key}. {item["label"]}' + Fore.RESET)
+            sleep(0.03)
+        print("--------------------------------------------------------------------------")
+
+    def choiceAction(key):
+        if key in menu:
+            action = menu[key].get('action')
             sleep(0.1)
-        print(Fore.GREEN + "69. Run the entire script and perform all of the tasks.")
-        print(Fore.RED +   "    ^ RECOMMENDED BUT WE ARE NOT RESPONSIBLE.")
-        print(Style.RESET_ALL)
-        print("------------------------------------")
-    
-    clear()
+            action()
+        else:
+            print(
+                f"{Fore.RED}\nIncorrect choice.{Fore.RESET}")
+            sleep(0.5)
+            clear()
+
     while True:
+        clear()
         printItems()
-        choice = int(input("Enter your choice :: "))
-        break
-    
+        choice = input("Enter your choice :: ")
+        choiceAction(choice)
+
     return
