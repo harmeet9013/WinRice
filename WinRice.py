@@ -2,7 +2,7 @@
 # DEPENDENCIES CURRENTLY BEING USED!!!
 # COLORAMA
 
-# Script requires >Python3.10
+# Script requires versions greather than Python3.10
 
 from files.ExitProgram import exit_program
 from files.DisplayMenu import display_menu

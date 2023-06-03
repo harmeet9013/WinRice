@@ -38,6 +38,8 @@ function RunWithProgress {
 	}
 	Write-Host -NoNewline -ForegroundColor $color "`r  [$ind] "; Write-Host "$endtext"
 	# Exit on failure
-	if ($Exit -and $fail) { wrexit }
-	return $result
+	if ($Exit -and $fail) {
+		Write-Host False
+		exit
+	}
 }

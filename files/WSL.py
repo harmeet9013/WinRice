@@ -10,7 +10,7 @@ def enableWSL():
     sleep(1)
     clear()
 
-    print(f"{Fore.CYAN}Tring to enable WSL...\n{Fore.RESET}")
+    print(f"Tring to enable WSL...\n")
     sleep(0.5)
 
     process = Popen(
@@ -31,5 +31,5 @@ def enableWSL():
             f"\t{decoded_result}{Fore.RESET}")
     sleep(1)
     print(
-        f"\n\n{Fore.CYAN}Going back to main menu....{Fore.RESET}")
+        f"\n\n\t{Fore.CYAN}Going back to main menu....{Fore.RESET}")
     sleep(2)

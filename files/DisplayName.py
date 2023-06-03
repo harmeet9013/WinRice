@@ -19,5 +19,6 @@ def display_name():
     for line in name_array:
         print(line)
         sleep(0.05)
+    sleep(2)
 
     return

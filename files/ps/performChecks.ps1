@@ -1,8 +1,4 @@
-#Import RunWithProgress
-. "$PSScriptRoot\RunWithProgress.ps1"
-
-# Check 1: If supported OS build.
-$oscheck = {
+function oscheck() {
 	$CurrentBuild = Get-ItemPropertyValue 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion' -Name CurrentBuild
 	if ($CurrentBuild -lt 19044) {
 		return $false
@@ -11,20 +7,14 @@ $oscheck = {
 		return $true
 	}
 }
-RunWithProgress -Text "[1/4] Windows version is supported" -Task $oscheck -Exit $true | Out-Null
 
-
-# Check 2: If session is elevated.
-$isadmin = {
+function isadmin() {
 	$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 	$admin = $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 	return $admin
 }
-RunWithProgress -Text "[2/4] Session is elevated" -Task $isadmin -Exit $true | Out-Null
 
-
-# Check 3: Internet Connection.
-$isonline = {
+function isonline() {
 	Import-Module BitsTransfer
 	Start-BitsTransfer "https://raw.githubusercontent.com/WinRice/Files/main/File.txt"
 	if (Test-Path File.txt) {
@@ -35,19 +25,8 @@ $isonline = {
 		return $false | Out-Null
 	}
 }
-RunWithProgress -Text "[3/4] Device is connected to the Internet" -Task $isonline -Exit $true | Out-Null
 
-
-# Task 1: Import Appx Module to PowerShell if necessary.
-# $pwshver = {
-# 	Import-Module -Name Appx -UseWindowsPowerShell -WarningAction "SilentlyContinue" | Out-Null
-# 	return $true
-# }
-# RunWithProgress -Text "[4/5] Setting up PowerShell" -Task $pwshver -Exit $true | Out-Null
-
-
-# Check 5: Check for pending restarts (part of code used here was picked from https://thesysadminchannel.com/remotely-check-pending-reboot-status-powershell).
-$isrestartpending = {
+function isrestartpending() {
 	param (
 		[Parameter(
 			Mandatory = $false,
@@ -80,7 +59,3 @@ $isrestartpending = {
 		}   
 	}
 }
-# Clear variables.
-$WMI_Reg = $null
-$SCCM_Namespace = $null
-RunWithProgress -Text "[4/4] Device session is fresh" -Task $isrestartpending -Exit $true | Out-Null
