@@ -26,11 +26,10 @@ def exit_program():
 
                 print(
                     f"{Fore.GREEN}Winstall.txt was not found!{Fore.RESET}")
-            sleep(1)
+            sleep(0.5)
 
             print(
                 f"\n\tExiting the program now. Have a good day!\n")
-            sleep(1)
             exit()
         elif result == False:
             print("\n\nNot exiting the program. Going back to menu")
@@ -39,4 +38,4 @@ def exit_program():
             return
         else:
             print("\nNot a proper input.")
-            sleep(1)
+            sleep(0.5)

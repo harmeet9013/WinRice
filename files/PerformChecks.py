@@ -16,7 +16,7 @@ def perform_checks():
 
     # calling powershell to open the script, dom't touch
     output = Popen(
-        ["powershell.exe", "files/ps/performcheck.ps1"], stdout=sys.stdout)
+        ["powershell.exe", "files/ps/performChecks.ps1"], stdout=sys.stdout)
     output.communicate()
 
     # don't touch this either

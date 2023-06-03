@@ -21,7 +21,7 @@ def winstall_main():
             print(
                 f"\n{Fore.RED}ERROR:{Fore.RESET}")
             print(
-                f"\t{decoded_result.splitlines()[-1]}")
+                f"\t{last_line}")
             return False
         return True
 

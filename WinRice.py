@@ -2,15 +2,15 @@
 # DEPENDENCIES CURRENTLY BEING USED!!!
 # COLORAMA
 
-# Script requires >Python3.
+# Script requires >Python3.10
 
 from files.ExitProgram import exit_program
-from files.Automation import automation
-from files.checkYes import checkYes
 from files.DisplayMenu import display_menu
+from files.VBS import enableVBS
 from files.PerformChecks import perform_checks
 from files.DisplayName import display_name
 from files.Winstall import winstall_main
+from files.WSL import enableWSL
 from colorama import Fore
 from time import sleep
 import os
@@ -31,13 +31,13 @@ def main():
             'color': Fore.WHITE
         },
         '2': {
-            'label': 'Disable VBS (NOT WORKING)',
-            'action': lambda: print(broken),
+            'label': 'Enable WSL',
+            'action': lambda: enableWSL(),
             'color': Fore.WHITE
         },
         '3': {
-            'label': 'Uninstall Edge (NOT WORKING)',
-            'action': lambda: print(broken),
+            'label': 'Enable VBS',
+            'action': lambda: enableVBS(),
             'color': Fore.WHITE
         },
         '4': {
@@ -61,7 +61,7 @@ def main():
     display_name()
 
     # Perform Checks before moving ahead
-    # perform_checks()
+    perform_checks()
 
     # Asking user how to proce
     display_menu(tasks)
